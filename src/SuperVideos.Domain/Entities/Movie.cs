@@ -7,6 +7,7 @@ namespace SuperVideos.Domain.Entities
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public byte[] Sleeve { get; set; }
+        public bool Available { get; set; }
         public MovieDetail MovieDetail { get; set; } = new MovieDetail();
 
         public Movie(){ }

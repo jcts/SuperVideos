@@ -54,7 +54,7 @@ namespace SuperVideos.Domain.Entities
         {
             unchecked
             {
-                return (int)Crosscuting.Constants.Config.NumPrimo3049 * (int)Crosscuting.Constants.Config.NumPrimo5039 + Id.GetHashCode();
+                return (int)Crosscutting.Constants.Config.NumPrimo3049 * (int)Crosscutting.Constants.Config.NumPrimo5039 + Id.GetHashCode();
             }
         }
     }
