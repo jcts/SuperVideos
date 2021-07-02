@@ -3,6 +3,8 @@
     public enum Config
     {
         NumPrimo5039 = 5039,
-        NumPrimo3049 = 3049
+        NumPrimo3049 = 3049,
+        MoviesPerPage = 4
+
     }
 }

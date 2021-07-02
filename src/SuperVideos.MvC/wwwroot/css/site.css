@@ -1,71 +1,282 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿i {
+    color: #380848;
+    cursor: pointer;
 }
+/*------------------------------------*\
+          NAV
+\*------------------------------------*/
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.navbar {
+    /*padding: 0.8rem 1rem !important;*/
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+#nav {
+    list-style: none;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    #nav li {
+        float: right;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    #nav a {
+        padding: 5px;
+        color: #380848;
+        text-decoration: none;
+    }
+
+        #nav a i {
+            font-size: 1.1em;
+        }
+
+        #nav a:hover {
+            color: #380848;
+            text-decoration: underline;
+        }
+
+    /*--- DROPDOWN ---*/
+    #nav ul {
+        background: #fff;
+        list-style: none;
+        position: absolute;
+        border-radius: 8px;
+        text-align: left;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        left: -9999px;
+    }
+
+        #nav ul li {
+            float: none;
+            margin-right: 0px;
+            line-height: 1.5;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 100;
+        }
+
+        #nav ul a {
+            white-space: nowrap;
+        }
+
+    #nav li:hover ul {
+        right: 0;
+        left: auto;
+        z-index: 99999;
+    }
+
+    #nav li:hover a {
+        text-decoration: underline;
+    }
+
+    #nav li:hover ul a {
+        text-decoration: none;
+    }
+
+.options-menu {
+    border-bottom: 1px solid #dee2e6 !important;
+    box-shadow: 0 0 0.06rem rgb(0 0 0 / 5%);
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    .options-menu li {
+        cursor: pointer;
+        min-width: 180px;
+    }
+
+.disabled {
+    pointer-events: none;
+    opacity: .6;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.options-menu li:not(:last-of-type) {
+    box-shadow: 0 0.02rem 0 rgb(88 80 141 / 40%)
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.options-menu li:not(:first-of-type) {
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.options-menu li:hover {
+    font-weight: 400 !important;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.options-menu li a {
+    padding: 2px !important;
+    display: block;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.form-control:focus {
+    border-color: none !important;
+    box-shadow: none !important;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    z-index: 99998;
 }
+
+/*------------------------------------*\
+          TOAST
+\*------------------------------------*/
+
+#toast {
+    visibility: hidden;
+    max-width: 35px;
+    height: 35px;
+    /*margin-left: -125px;*/
+    margin: auto;
+    background-color: #380848;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    line-height: 2;
+    white-space: nowrap;
+}
+
+    #toast #img {
+        width: 35px;
+        height: 35px;
+        float: left;
+        /*padding-top: 16px;*/
+        /*padding-bottom: 16px;*/
+        box-sizing: border-box;
+        background-color: #380848;
+        color: white;
+        border: 1px solid #380848;
+    }
+
+    #toast #desc {
+        color: #fff;
+        /*padding: 16px;*/
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    #toast.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+    }
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes expand {
+    from {
+        min-width: 35px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@keyframes expand {
+    from {
+        min-width: 35px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@-webkit-keyframes stay {
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@keyframes stay {
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@-webkit-keyframes shrink {
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 35px;
+    }
+}
+
+@keyframes shrink {
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 35px;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 60px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 60px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 0;
+    }
+}
+
+/*------------------------------------*\
+          END
+\*------------------------------------*/

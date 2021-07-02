@@ -5,6 +5,7 @@
         public long BarCode { get; set; }
         public int Duration { get; set; }
         public long Isbn { get; set; }
+        public string Code { get; set; }
 
         public MovieDetail()
         {   }

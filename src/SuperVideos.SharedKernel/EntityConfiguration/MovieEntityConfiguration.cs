@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SuperVideos.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperVideos.SharedKernel.EntityConfiguration
 {
@@ -15,6 +10,27 @@ namespace SuperVideos.SharedKernel.EntityConfiguration
         {
             _ = builder.ToTable("Movies")
                 .HasKey(c => c.Id);
+
+            _ = builder.OwnsOne(c => c.MovieDetail)
+                .Property(c => c.BarCode)
+                .HasColumnName("BarCode");
+
+            _ = builder.OwnsOne(c => c.MovieDetail)
+                .Property(c => c.Duration)
+                .HasColumnName("Duration");
+
+            _ = builder.OwnsOne(c => c.MovieDetail)
+                .Property(c => c.Isbn)
+                .HasColumnName("Isbn");
+
+            _ = builder.OwnsOne(c => c.MovieDetail)
+                .Property(c => c.Code)
+                .HasColumnName("Code");
+
+            _ = builder.OwnsOne(c => c.MovieDetail)
+                .HasIndex(c => c.Code)
+                .IsUnique();
+                
         }
     }
 }

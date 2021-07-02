@@ -1,0 +1,77 @@
+﻿@model X.PagedList.IPagedList<SuperVideos.Application.Models.MovieViewModel>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web.Common;
+
+
+<div class="">
+    <div class="row d-flex">
+        <div class="col-md-3">
+            <form>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <input type="text" id="busca" name="busca" class="form-control" placeholder="Pesquisar" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" />
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+
+    <div class="row d-flex">
+        @{
+            foreach (var movie in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="col p-4 d-flex flex-column position-static" style="align-items: center;">
+                        <img src="@Url.Action("LoadSleeveImage", "Movie", new { movieId = movie.Id })" width="200" height="300" style="border-radius: 5px;" />
+                    </div>
+                </div>
+                <div class="col-sm-3 p-4" style="padding-left: unset;">
+                    <div class="row">
+                        <div class="col-sm-12" style="align-items: center;">
+                            <strong class="d-inline-block mb-2 text-primary">@movie.Title.ToUpper()</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 p-1 d-flex flex-column position-static" style="align-items: center;">
+                            <strong class="d-inline-block mb-2 text-primary" style="font-size: small;">@movie.Synopsis</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col p-2 d-flex flex-row position-static">
+                            @if (movie.Available)
+                            {<a class="btn btn-outline-primary btn-sm m-1" onclick="javascript:SuperVideos.Movie.OnSetUnavailable(this);" data-id="@movie.Id">Locar Filme</a> }
+                            else
+                            {<a class="btn btn-outline-secondary btn-sm m-1" onclick="javascript:SuperVideos.Movie.OnAvailable(this);" data-id="@movie.Id">Devolver Filme</a>}
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="row d-flex">
+        <div class="col-md-8">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Gallery", new { page }), new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" }
+            })
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <script src="~/lib/superfilmes/supervideos-animation.js"></script>
+    <script src="~/lib/superfilmes/supervideos-movie.js"></script>
+}

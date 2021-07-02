@@ -1,0 +1,59 @@
+﻿@model SuperVideos.Application.Models.MovieViewModel
+
+@{
+    Layout = null;
+}
+
+
+<div class="col-sm-2" style="display: grid; border-radius:7px; box-shadow: 0px 0px 0.1rem 0px rgb(84 84 100 / 28%); height:min-content">
+    <img src="@Url.Action("LoadSleeveImage", "Movie", new { movieId = Model.Id })" style="width: 143px; height: 200px;" id="avatar-view-edit" />
+    <a href="#" class="link-clean" style="margin-bottom: 1rem;" id="load-file-edit-movie" onclick="SuperVideos.Movie.OpenDialogFileEdit()"> <i class="fas fa-camera"></i> Carregar Imagem</a>
+</div>
+<div class="col-sm-8" style="display: grid; border-radius:7px; box-shadow: 0px 0px 0.1rem 0px rgb(84 84 100 / 28%); margin-left: 1rem">
+    <span>Dados Básicos</span>
+    <br />
+    <form id="form-edit-movie">
+
+
+        <input type="text" class="form-control form-control-sm" style="display: none;" id="id" name="id" value="@Model.Id" required>
+
+        <div class="form-group">
+            <label for="code">Código Interno</label>
+            <input type="text" class="form-control form-control-sm" id="code" name="code" placeholder="Informe o código interno do Filme" value="@Model.Code" required>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" class="form-control form-control-sm" id="title" name="title" placeholder="Informe o Título do Filme" value="@Model.Title" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Genêro</label>
+            <input type="text" class="form-control form-control-sm" id="gender" name="gender" aria-describedby="gender" placeholder="Informe o Gênero do Filme" value="@Model.Gender" required>
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Sinopse</label>
+            <input type="text" class="form-control form-control-sm" id="synopsis" name="synopsis" placeholder="Informe a Sinopse do Filme" value="@Model.Synopsis" required>
+        </div>
+
+        <div class="form-group">
+            <label for="barcode">Código de Barras</label>
+            <input type="number" class="form-control form-control-sm" id="barcode" name="barcode" placeholder="Informe o Código de Barras do Filme" value="@Model.BarCode" required>
+        </div>
+
+        <div class="form-group">
+            <label for="duration">Duração</label>
+            <input type="number" class="form-control form-control-sm" id="duration" name="duration" placeholder="Informe a Duração do Filme em minutos" value="@Model.Duration" required>
+        </div>
+
+        <div class="form-group">
+            <label for="isbn">Isbn</label>
+            <input type="number" class="form-control form-control-sm" id="isbn" name="isbn" placeholder="Informe o número Isbn do Filme" value="@Model.Isbn" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <button type="button" class="btn btn-primary backBtn" onclick="javascript:SuperVideos.Animation.Hide();">Voltar</button>
+
+        <input type="file" style="display: none;" id="picture-movie-edit" name="sleeve" accept="image/*" />
+
+    </form>
+</div>

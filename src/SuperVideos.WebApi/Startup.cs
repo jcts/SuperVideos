@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using SuperVideos.Application;
 using SuperVideos.Application.Contracts;
 using SuperVideos.Application.Mappers;
 
-namespace SuperVideos.MvC
+namespace SuperVideos.WebApi
 {
     public partial class Startup
     {
@@ -25,6 +26,8 @@ namespace SuperVideos.MvC
         {
             _services = services;
 
+            services.AddControllers();
+
             AddContexts();
 
             #region Application Map
@@ -35,7 +38,10 @@ namespace SuperVideos.MvC
 
             services.AddSingleton(mapper);
 
-            services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperVideos.WebApi", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,12 +50,12 @@ namespace SuperVideos.MvC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperVideos.WebApi v1"));
+
+                app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -57,9 +63,7 @@ namespace SuperVideos.MvC
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

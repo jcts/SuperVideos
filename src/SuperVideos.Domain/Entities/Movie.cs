@@ -5,9 +5,12 @@ namespace SuperVideos.Domain.Entities
     public class Movie : EntityBase
     {
         public string Title { get; set; }
+        public string Gender { get; set; }
         public string Synopsis { get; set; }
         public byte[] Sleeve { get; set; }
+        public string ContenType { get; set; }
         public bool Available { get; set; }
+        
         public MovieDetail MovieDetail { get; set; } = new MovieDetail();
 
         public Movie(){ }
@@ -18,6 +21,7 @@ namespace SuperVideos.Domain.Entities
             Synopsis = synopsis;
             Sleeve = sleeve;
             MovieDetail = movieDetail;
+
         }
     }
 }
